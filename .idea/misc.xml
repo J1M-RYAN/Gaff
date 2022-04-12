@@ -3,7 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/add_property.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/all_landlord_properties.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/settings_icon.xml" value="0.135" />
+        <entry key="app/src/main/res/layout/activity_land_lord_home.xml" value="0.15830800405268491" />
+        <entry key="app/src/main/res/layout/activity_land_lord_login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_land_lord_register.xml" value="0.1388888888888889" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_renter_login.xml" value="0.1656534954407295" />
+        <entry key="app/src/main/res/layout/activity_renter_register.xml" value="0.1656534954407295" />
+        <entry key="app/src/main/res/layout/fragment_add_new_property.xml" value="0.13095238095238096" />
+        <entry key="app/src/main/res/layout/fragment_landlord_settings.xml" value="0.15555555555555556" />
+        <entry key="app/src/main/res/layout/fragment_landlords_properties.xml" value="0.15555555555555556" />
+        <entry key="app/src/main/res/layout/landlord_property_list_item.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/landlord_nav_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

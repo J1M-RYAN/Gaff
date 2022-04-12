@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/landlord_list_item_house_image"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:src="@drawable/house"/>
+
+    <TextView
+        android:id="@+id/landlord_list_item_address1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/landlord_list_item_house_image"
+        android:text="Carrowkeel East"
+        android:textSize="22sp"/>
+
+    <TextView
+        android:id="@+id/landlord_list_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/landlord_list_item_house_image"
+        android:layout_below="@+id/landlord_list_item_address1"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="center"
+        android:text="1000"
+        android:textSize="18sp"/>
+
+</RelativeLayout>

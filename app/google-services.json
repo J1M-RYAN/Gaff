@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "79113087212",
+    "project_id": "gaff-14394",
+    "storage_bucket": "gaff-14394.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79113087212:android:abcfd2ffc09762e598ddc9",
+        "android_client_info": {
+          "package_name": "com.example.gaff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "79113087212-u809ni5mc885oeef0ecmt43apddpfbde.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5waxAviDRrQf4Zg4iGwtlldKXrS-M_nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "79113087212-u809ni5mc885oeef0ecmt43apddpfbde.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/landlordsProperties"
+        android:icon="@drawable/all_landlord_properties"
+        android:title="" />
+    <item
+        android:id="@+id/addNewProperty"
+        android:icon="@drawable/add_property"
+        android:title="" />
+    <item
+        android:id="@+id/landlordSettings"
+        android:icon="@drawable/settings_icon"
+        android:title="" />
+</menu>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/landlord_nav"
+    app:startDestination="@id/landlordsProperties">
+
+    <fragment
+        android:id="@+id/landlordsProperties"
+        android:name="com.example.gaff.LandlordsProperties"
+        android:label="fragment_landlords_properties"
+        tools:layout="@layout/fragment_landlords_properties" />
+    <fragment
+        android:id="@+id/addNewProperty"
+        android:name="com.example.gaff.AddNewProperty"
+        android:label="fragment_add_new_property"
+        tools:layout="@layout/fragment_add_new_property" />
+    <fragment
+        android:id="@+id/landlordSettings"
+        android:name="com.example.gaff.landlordSettings"
+        android:label="fragment_landlord_settings"
+        tools:layout="@layout/fragment_landlord_settings" />
+</navigation>

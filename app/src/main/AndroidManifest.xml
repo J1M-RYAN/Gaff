@@ -10,6 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gaff">
         <activity
+            android:name=".LandLordHome"
+            android:exported="false" />
+        <activity
+            android:name=".RenterRegister"
+            android:exported="false" />
+        <activity
+            android:name=".RenterLogin"
+            android:exported="false" />
+        <activity
+            android:name=".LandLordRegister"
+            android:exported="false" />
+        <activity
+            android:name=".LandLordLogin"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.LandLordLogin"
+            android:exported="false"
+            android:label="@string/title_activity_land_lord_login" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -6,38 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/landlord_btn2"
-        android:layout_width="264dp"
-        android:layout_height="47dp"
-        android:text="I want to rent"
-        tools:layout_editor_absoluteX="73dp"
-        tools:layout_editor_absoluteY="438dp" />
+    <LinearLayout
+        android:layout_width="410dp"
+        android:layout_height="730dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/lobster_two"
-        android:text="Gaff"
-        android:textSize="100px"
-        tools:layout_editor_absoluteX="175dp"
-        tools:layout_editor_absoluteY="277dp" />
+        <ImageView
+            android:id="@+id/house_logo"
+            android:layout_width="58dp"
+            android:layout_height="55dp"
+            app:srcCompat="@drawable/house" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="58dp"
-        android:layout_height="55dp"
-        app:srcCompat="@drawable/house"
-        tools:layout_editor_absoluteX="176dp"
-        tools:layout_editor_absoluteY="209dp" />
+        <TextView
+            android:id="@+id/gaff_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="96dp"
+            android:fontFamily="@font/lobster_two"
+            android:text="Gaff"
+            android:textSize="100px" />
 
-    <Button
-        android:id="@+id/landlord_btn"
-        android:layout_width="264dp"
-        android:layout_height="47dp"
-        android:text="I am a landlord"
-        tools:layout_editor_absoluteX="73dp"
-        tools:layout_editor_absoluteY="375dp" />
+        <Button
+            android:id="@+id/landlord_btn"
+            android:layout_width="264dp"
+            android:layout_height="47dp"
+            android:text="I am a landlord" />
+
+        <Button
+            android:id="@+id/renter_btn"
+            android:layout_width="264dp"
+            android:layout_height="47dp"
+            android:text="I want to rent" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
