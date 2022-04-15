@@ -4,46 +4,52 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.annotation.Native;
 import java.util.ArrayList;
 
-public class PropertyAdapter extends ArrayAdapter<PropertyHelper> {
-    private ArrayList<PropertyHelper> propertyList;
+public class PropertyAdapter  extends RecyclerView.Adapter<PropertyAdapter.MyViewHolder> {
+    Context context;
+    ArrayList<Property> propertyArrayList;
 
-    public PropertyAdapter(@NonNull Context context,int resource,ArrayList<PropertyHelper> propertyList){
-            super(context,resource);
-            this.propertyList = propertyList;
+    public PropertyAdapter(Context context, ArrayList<Property> propertyArrayList) {
+        this.context = context;
+        this.propertyArrayList = propertyArrayList;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.landlord_property_list_item, parent,false);
-        }
-        ImageView propertyImage = convertView.findViewById(R.id.landlord_list_item_house_image);
-        TextView addressLine1 = convertView.findViewById(R.id.landlord_list_item_address1);
-        TextView pricePerMonth = convertView.findViewById(R.id.pricePerMonth);
+    public PropertyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context).inflate(R.layout.activity_property_post,parent,false);
+        return new MyViewHolder(v);
+    }
 
-       // propertyImage.setImageResource(propertyList.get(position).getImage());
-        addressLine1.setText(propertyList.get(position).getAddressLine1());
-        pricePerMonth.setText(propertyList.get(position).getPricePerMonth());
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // on the item click on our list view.
-                // we are displaying a toast message.
-                Toast.makeText(getContext(), "Item clicked is : " + propertyList.get(position).getAddressLine1(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        return convertView;
+    @Override
+    public void onBindViewHolder(@NonNull PropertyAdapter.MyViewHolder holder, int position) {
+        Property property = propertyArrayList.get(position);
+        holder.addressLine1.setText(property.getAddressLine1());
+        holder.addressLine2.setText(property.getAddressLine2());
+        holder.pricePerMonth.setText(property.getPricePerMonth());
+        //holder.pricePerMonth.setText(String.valueOf(property.getPricePerMonth()));
+    }
+
+    @Override
+    public int getItemCount() {
+        return propertyArrayList.size();
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
+
+        TextView addressLine1, addressLine2, pricePerMonth;
+
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            addressLine1 = itemView.findViewById(R.id.tvaddressLine1);
+            addressLine2 = itemView.findViewById(R.id.tvaddressLine2);
+            pricePerMonth = itemView.findViewById(R.id.tvpricePerMonth);
+        }
     }
 }
