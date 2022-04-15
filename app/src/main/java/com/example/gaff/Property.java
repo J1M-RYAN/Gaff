@@ -1,13 +1,13 @@
 package com.example.gaff;
 
-public class PropertyHelper {
+public class Property {
     private String addressLine1, addressLine2;
-    private int pricePerMonth;
+    private String pricePerMonth;
 
-    public PropertyHelper(){
+    public Property(){
         // required no arg constructor
     }
-    public PropertyHelper(String addressLine1, String addressLine2, int pricePerMonth){
+    public Property(String addressLine1, String addressLine2, String pricePerMonth){
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.pricePerMonth = pricePerMonth;
@@ -28,13 +28,12 @@ public class PropertyHelper {
         this.addressLine2 = addressLine2;
     }
 
-    public int getPricePerMonth() {
+    public String getPricePerMonth() {
         return pricePerMonth;
     }
 
-    public void setPricePerMonth(int pricePerMonth) {
+    public void setPricePerMonth(String pricePerMonth) {
         this.pricePerMonth = pricePerMonth;
     }
-
 
 }
