@@ -1,13 +1,18 @@
 package com.example.gaff;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,6 +22,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -35,11 +46,12 @@ public class LandlordsProperties extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase database;
-    private DatabaseReference myRef;
-    ListView listOfProperties;
-    private ArrayList<PropertyHelper> landLordsProperties;
+
+    RecyclerView recyclerView;
+    ArrayList<Property> propertyArrayList;
+    PropertyAdapter propertyAdapter;
+    FirebaseFirestore db;
+    ProgressDialog progressDialog;
 
     public LandlordsProperties() {
         // Required empty public constructor
@@ -76,45 +88,66 @@ public class LandlordsProperties extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_landlords_properties, container, false);
 
-        listOfProperties = (ListView) rootView.findViewById(R.id.list_of_properties);
-        landLordsProperties = new ArrayList<>();
-        updateProperties();
-
-        PropertyAdapter propertyAdapter = new PropertyAdapter(getActivity(),R.layout.landlord_property_list_item, landLordsProperties);
-        listOfProperties.setAdapter(propertyAdapter);
-
-
-        return rootView;
+        return  inflater.inflate(R.layout.fragment_landlords_properties, container, false);
     }
 
-    private void updateProperties() {
 
-        mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance("https://gaff-14394-default-rtdb.firebaseio.com");
-        myRef = database.getReference("properties");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<PropertyHelper> properties = new ArrayList<>();
-                for (DataSnapshot property : dataSnapshot.getChildren()) {
-                    PropertyHelper p = property.getValue(PropertyHelper.class);
-                    properties.add(p);
-                    Toast.makeText(getActivity(), p.getAddressLine1(), Toast.LENGTH_SHORT).show();
+    @Override
+    public void onViewCreated (@NonNull View view, @Nullable Bundle SavedInstanceState){ //Retrospective Method added - Once the view is created - method is called
+        super.onViewCreated(view, SavedInstanceState);
 
-                }
-                landLordsProperties = properties;
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Fetching Data....");
+        progressDialog.show();
 
-            }
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        //Initialize firebase/fire store DB
+        db = FirebaseFirestore.getInstance();
+        propertyArrayList = new ArrayList<Property>();
+        //Initialize adapter
+        propertyAdapter = new PropertyAdapter(getActivity(),propertyArrayList);
+        //Set recycler view use to the adapter
+        recyclerView.setAdapter(propertyAdapter);
+        //Get Data from the fire store
+        EventChangeListener();
+    }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                //
-            }
-        });
+    private void EventChangeListener() {
+        //Refer to the collection
+        db.collection("Properties").orderBy("addressLine2", Query.Direction.ASCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        // Call back method
+                        // Called when new data is added, modified, removed data
+                        // When the application runs - Data from firebase is retrieved
 
+                        //Order fetched data from the fire store
+                        if(error != null){
 
+                            if(progressDialog.isShowing()){
+                                progressDialog.dismiss();
+                            }
+                            Log.e("Firestore error", error.getMessage());
+                            return;
+                        }
+
+                        for(DocumentChange dc : value.getDocumentChanges()){
+                            if(dc.getType() == DocumentChange.Type.ADDED){
+                                propertyArrayList.add(dc.getDocument().toObject(Property.class));
+                            }
+                            propertyAdapter.notifyDataSetChanged();
+                            if(progressDialog.isShowing()){
+                                progressDialog.dismiss();
+                            }
+                        }
+
+                    }
+                });
     }
 }
