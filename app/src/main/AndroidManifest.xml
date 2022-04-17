@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gaff">
         <activity
+            android:name=".LandLordRegisterPg2"
+            android:exported="false" />
+        <activity
+            android:name=".LandLorRegisterPg2"
+            android:exported="false" />
+        <activity
             android:name=".LandLordHome"
             android:exported="false" />
         <activity
