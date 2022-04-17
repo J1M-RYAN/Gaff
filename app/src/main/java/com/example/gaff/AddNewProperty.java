@@ -41,7 +41,7 @@ public class AddNewProperty extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private EditText addressLine1, addressLine2, pricePerMonth;
+    private EditText addressLine1, addressLine2, pricePerMonth, eircode, propertyType, bedrooms, bathrooms, title, privateParking;
     Button addProperty;
 
     String user_id;
@@ -89,6 +89,12 @@ public class AddNewProperty extends Fragment {
         addressLine2 = (EditText)  rootView.findViewById(R.id.editTextTextPostalAddressLine2);
         pricePerMonth = (EditText) rootView.findViewById(R.id.pricePerMonth);
         addProperty = (Button) rootView.findViewById(R.id.add_property_btn);
+        eircode = (EditText) rootView.findViewById(R.id.eircode);
+        propertyType = (EditText) rootView.findViewById(R.id.propertyType);
+        bedrooms = (EditText) rootView.findViewById(R.id.bedrooms);
+        bathrooms = (EditText) rootView.findViewById(R.id.bathrooms);
+        title = (EditText) rootView.findViewById(R.id.title);
+        privateParking = (EditText) rootView.findViewById(R.id.privateParking);
 
         firebaseAuth = FirebaseAuth.getInstance();
         user_id = firebaseAuth.getCurrentUser().getUid();
@@ -99,13 +105,18 @@ public class AddNewProperty extends Fragment {
         addProperty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 final String address1 = addressLine1.getText().toString();
                 final String address2 = addressLine2.getText().toString();
                 final String price = pricePerMonth.getText().toString();
+                final String eirCode = eircode.getText().toString();
+                final String propertyT = propertyType.getText().toString();
+                final String bedRooms = bedrooms.getText().toString();
+                final String bathRooms = bathrooms.getText().toString();
+                final String Title = title.getText().toString();
+                final String privatePark = privateParking.getText().toString();
                 //final int price = Integer.parseInt(pricePerMonth.getText().toString());
                 if(!TextUtils.isEmpty(address1) && !TextUtils.isEmpty(address2) && !TextUtils.isEmpty(price)){
-                    addProperty(address1,address2,price);
+                    addProperty(address1,address2,price,eirCode,propertyT,bedRooms,bathRooms,Title,privatePark);
                 }else{
                     Toast.makeText(getActivity(), "Fill all the fields", Toast.LENGTH_SHORT).show();
                 }
@@ -118,11 +129,18 @@ public class AddNewProperty extends Fragment {
         return true;
     }
 
-    private void addProperty(String addressLine1, String addressLine2, String pricePerMonth) {
+    private void addProperty(String addressLine1, String addressLine2, String pricePerMonth, String eircode, String propertyType, String bedrooms,
+                             String bathrooms, String title, String privateParking) {
         Map<String, Object> property = new HashMap<>();
         property.put("addressLine1", addressLine1);
         property.put("addressLine2", addressLine2);
         property.put("pricePerMonth", pricePerMonth);
+        property.put("eircode", eircode);
+        property.put("propertyType", propertyType);
+        property.put("bedrooms", bedrooms);
+        property.put("bathrooms", bathrooms);
+        property.put("title", title);
+        property.put("privateParking", privateParking);
         firebaseFirestore.collection("Properties").document(user_id).set(property).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
