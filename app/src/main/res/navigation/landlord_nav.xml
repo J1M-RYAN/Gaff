@@ -9,7 +9,11 @@
         android:id="@+id/landlordsProperties"
         android:name="com.example.gaff.LandlordsProperties"
         android:label="fragment_landlords_properties"
-        tools:layout="@layout/fragment_landlords_properties" />
+        tools:layout="@layout/fragment_landlords_properties" >
+        <action
+            android:id="@+id/action_landlordsProperties_to_propertyPostDescriptionFragment"
+            app:destination="@id/propertyPostDescriptionFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addNewProperty"
         android:name="com.example.gaff.AddNewProperty"
@@ -20,4 +24,9 @@
         android:name="com.example.gaff.landlordSettings"
         android:label="fragment_landlord_settings"
         tools:layout="@layout/fragment_landlord_settings" />
+    <fragment
+        android:id="@+id/propertyPostDescriptionFragment"
+        android:name="com.example.gaff.PropertyPostDescriptionFragment"
+        android:label="fragment_property_post_description"
+        tools:layout="@layout/fragment_property_post_description" />
 </navigation>

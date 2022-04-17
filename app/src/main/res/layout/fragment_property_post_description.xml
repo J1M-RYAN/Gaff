@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PropertyPostDescriptionFragment">
+
+
+    <TextView
+        android:id="@+id/AAprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="18dp"
+        android:text="$1500"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AAtitle" />
+
+    <TextView
+        android:id="@+id/AAaddressline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="18dp"
+        android:text="Clonlara"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AAprice" />
+
+    <TextView
+        android:id="@+id/AAaddressline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="18dp"
+        android:text="Clare"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/AAaddressline1"
+        app:layout_constraintTop_toBottomOf="@+id/priceStatement1" />
+
+    <TextView
+        android:id="@+id/AAeircode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="18dp"
+        android:text="A65 F4E2"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/AAaddressline2"
+        app:layout_constraintTop_toBottomOf="@+id/priceStatement1" />
+
+    <TextView
+        android:id="@+id/AApropertyType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="20dp"
+        android:text="House"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/propertyTypeStatement"
+        app:layout_constraintTop_toBottomOf="@+id/heading" />
+
+    <TextView
+        android:id="@+id/AAbedrooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="2"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/bedroomStatement"
+        app:layout_constraintTop_toBottomOf="@+id/AAbathrooms" />
+
+    <TextView
+        android:id="@+id/AAbathrooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="2"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/bathroomStatement"
+        app:layout_constraintTop_toBottomOf="@+id/AApropertyType" />
+
+    <TextView
+        android:id="@+id/AAtitle"
+        android:layout_width="369dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Modern Dormer With River View"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/AAprivateParking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="20dp"
+        android:text="Yes"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/privateParkingStatement"
+        app:layout_constraintTop_toBottomOf="@+id/AAbedrooms" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:src="@drawable/ic_home"
+        app:tint="@color/purple_500"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/priceStatement1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="18dp"
+        android:text="per month"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/AAprice"
+        app:layout_constraintTop_toBottomOf="@+id/AAtitle" />
+
+    <TextView
+        android:id="@+id/propertyTypeStatement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Property Type :"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heading" />
+
+    <TextView
+        android:id="@+id/bathroomStatement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Number of bathrooms :"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/propertyTypeStatement" />
+
+    <TextView
+        android:id="@+id/bedroomStatement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Number of bedrooms"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bathroomStatement" />
+
+    <TextView
+        android:id="@+id/privateParkingStatement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Private Parking :"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bedroomStatement" />
+
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="20dp"
+        android:text="Property Description"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AAeircode" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
