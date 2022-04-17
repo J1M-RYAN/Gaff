@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -17,15 +18,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LandLordRegister extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
     private Button back, register;
     private EditText email, password, confirmPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         setContentView(R.layout.activity_land_lord_register);
 
         back = (Button) findViewById(R.id.back_btn);
@@ -81,11 +88,34 @@ public class LandLordRegister extends AppCompatActivity {
             return true;
         }
     }
-    public void openLandLordLogin() {
-        Intent intent = new Intent(this, LandLordLogin.class);
+
+    public void openLandLordRegisterPg2() {
+        Intent intent = new Intent(this, LandLordRegisterPg2.class);
         startActivity(intent);
     }
 
+    private void addUserIdToLandLordsCollection(String user_id) {
+        Map<String, Object> details = new HashMap<>();
+        details.put("landlordId", user_id);
+        db.collection("LandlordsUserIds").document(user_id).set(details);
+    }
+
+    private void addUserDetails(String name, String contactNum, String user_id) {
+        Map<String, Object> userDetails = new HashMap<>();
+        userDetails.put("name", name);
+        userDetails.put("contactNum", contactNum);
+        db.collection("LandLordsDetails").document(user_id).set(userDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(LandLordRegister.this, "Details Successfully Added",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(LandLordRegister.this, "Firestore Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
     private void tryRegister(String email, String password, String confirm) {
         if (!validate(email, password, confirm)) {
@@ -96,12 +126,15 @@ public class LandLordRegister extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                String user_id = mAuth.getCurrentUser().getUid();
+                                addUserIdToLandLordsCollection(user_id);
+                                addUserDetails("", "", user_id);
                                 Toast.makeText(LandLordRegister.this, "Account created.",
                                         Toast.LENGTH_SHORT).show();
                                 Handler handler = new Handler();
                                 handler.postDelayed(new Runnable() {
                                     public void run() {
-                                        openLandLordLogin();
+                                        openLandLordRegisterPg2();
                                     }
                                 }, 1000);
                             } else {
