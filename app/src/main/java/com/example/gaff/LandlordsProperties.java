@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +39,7 @@ import java.util.ArrayList;
  * Use the {@link LandlordsProperties#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LandlordsProperties extends Fragment {
+public class LandlordsProperties extends Fragment implements RecyclerViewInterface{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,6 +55,7 @@ public class LandlordsProperties extends Fragment {
     PropertyAdapter propertyAdapter;
     FirebaseFirestore db;
     ProgressDialog progressDialog;
+    private NavController navController;
 
     public LandlordsProperties() {
         // Required empty public constructor
@@ -96,6 +100,7 @@ public class LandlordsProperties extends Fragment {
     @Override
     public void onViewCreated (@NonNull View view, @Nullable Bundle SavedInstanceState){ //Retrospective Method added - Once the view is created - method is called
         super.onViewCreated(view, SavedInstanceState);
+        navController = Navigation.findNavController(view);
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
@@ -110,7 +115,7 @@ public class LandlordsProperties extends Fragment {
         db = FirebaseFirestore.getInstance();
         propertyArrayList = new ArrayList<Property>();
         //Initialize adapter
-        propertyAdapter = new PropertyAdapter(getActivity(),propertyArrayList);
+        propertyAdapter = new PropertyAdapter(getActivity(),propertyArrayList, this);
         //Set recycler view use to the adapter
         recyclerView.setAdapter(propertyAdapter);
         //Get Data from the fire store
@@ -149,5 +154,32 @@ public class LandlordsProperties extends Fragment {
 
                     }
                 });
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        String addressLine1 = propertyArrayList.get(position).getAddressLine1();
+        String addressLine2 = propertyArrayList.get(position).getAddressLine2();
+        String pricePerMonth = propertyArrayList.get(position).getPricePerMonth();
+
+        String eircode = propertyArrayList.get(position).getEircode();
+        String propertyType = propertyArrayList.get(position).getPropertyType();
+        String bedrooms = propertyArrayList.get(position).getBedrooms();
+        String bathrooms = propertyArrayList.get(position).getBathrooms();
+        String title = propertyArrayList.get(position).getTitle();
+        String privateParking = propertyArrayList.get(position).getPrivateParking();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("addressLine1", addressLine1);
+        bundle.putString("addressLine2", addressLine2);
+        bundle.putString("pricePerMonth", pricePerMonth);
+        bundle.putString("eircode", eircode);
+        bundle.putString("propertyType", propertyType);
+        bundle.putString("bedrooms", bedrooms);
+        bundle.putString("bathrooms", bathrooms);
+        bundle.putString("title", title);
+        bundle.putString("privateParking", privateParking);
+
+        navController.navigate(R.id.action_landlordsProperties_to_propertyPostDescriptionFragment, bundle);
     }
 }
