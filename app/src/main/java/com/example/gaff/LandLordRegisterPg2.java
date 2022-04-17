@@ -17,16 +17,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-public class LandLordRegister2 extends AppCompatActivity {
+import java.util.HashMap;
+import java.util.Map;
+
+public class LandLordRegisterPg2 extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
     private Button back, register;
     private EditText name, contactNum;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        setContentView(R.layout.activity_land_lord_register);
+        db =  FirebaseFirestore.getInstance();
+        setContentView(R.layout.activity_land_lord_register_pg2);
 
         back = (Button) findViewById(R.id.back_btn);
         register = (Button) findViewById(R.id.register_btn);
@@ -39,14 +45,14 @@ public class LandLordRegister2 extends AppCompatActivity {
                 finish();
             }
         });
-        
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if (name.getText() == null || contactNum.getText() == null || 
-                name.getText().toString().length() == 0 || 
-                contactNum.getText().toString().length() == 0) {
-                    Toast.makeText(LandLordRegister2.this, "Enter a name and contact number",
+            public void onClick(View view){
+                if (name.getText() == null || contactNum.getText() == null ||
+                        name.getText().toString().length() == 0 ||
+                        contactNum.getText().toString().length() == 0) {
+                    Toast.makeText(LandLordRegisterPg2.this, "Enter a name and contact number",
                             Toast.LENGTH_SHORT).show();
                 } else {
                     tryRegister(name.getText().toString(), contactNum.getText().toString());
@@ -60,7 +66,7 @@ public class LandLordRegister2 extends AppCompatActivity {
     }
 
     public boolean isValidName(String name) {
-        if(!name.matches("[a-zA-Z ]+"))  
+        if(!name.matches("[a-zA-Z ]+"))
         {
             return false;
         }
@@ -69,11 +75,11 @@ public class LandLordRegister2 extends AppCompatActivity {
 
     public boolean validate(String name, String contactNum) {
         if (!isValidName(name)) {
-            Toast.makeText(LandLordRegister2.this, "Invalid Name, must be alphabetical characters",
+            Toast.makeText(LandLordRegisterPg2.this, "Invalid Name, must be alphabetical characters",
                     Toast.LENGTH_LONG).show();
             return false;
         }else if (!isValidContactNumber(contactNum)) {
-            Toast.makeText(LandLordRegister2.this, "Invalid contact number",
+            Toast.makeText(LandLordRegisterPg2.this, "Invalid contact number",
                     Toast.LENGTH_LONG).show();
             return false;
         } else {
@@ -90,8 +96,8 @@ public class LandLordRegister2 extends AppCompatActivity {
         if (!validate(name, contactNum)) {
             return;
         }else{
-            Toast.makeText(LandLordRegister2.this, "Account created.",
-                    Toast.LENGTH_SHORT).show();
+            String user_id = mAuth.getCurrentUser().getUid();
+            updateUserDetails(name, contactNum, user_id);
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
@@ -99,5 +105,22 @@ public class LandLordRegister2 extends AppCompatActivity {
                 }
             }, 1000);
         };
+    }
+
+    private void updateUserDetails(String name, String contactNum, String user_id) {
+        Map<String, Object> userDetails = new HashMap<>();
+        userDetails.put("name", name);
+        userDetails.put("contactNum", contactNum);
+        db.collection("LandLordsDetails").document(user_id).update(userDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(LandLordRegisterPg2.this, "Details Updated",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(LandLordRegisterPg2.this, "Firestore Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
