@@ -25,10 +25,6 @@ public class RenterHome extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_renter_home);
 
-
-        mAuth.signInWithEmailAndPassword("rambocool@gmail.com", "rambo123");
-
-
         currentUser = mAuth.getCurrentUser();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
