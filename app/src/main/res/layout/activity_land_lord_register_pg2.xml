@@ -28,7 +28,7 @@
             android:layout_marginBottom="40px"
             android:fontFamily="@font/lobster_two"
             android:gravity="center"
-            android:text="Landlord details"
+            android:text="Profile details"
             android:textSize="24sp" />
 
         <LinearLayout
@@ -83,7 +83,7 @@
             android:id="@+id/register_btn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Register" />
+            android:text="Update" />
 
         <Button
             android:id="@+id/back_btn"

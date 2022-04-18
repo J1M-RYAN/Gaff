@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -17,15 +18,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RenterRegister extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
     private Button back, register;
     private EditText email, password, confirmPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         setContentView(R.layout.activity_renter_register);
 
         back = (Button) findViewById(R.id.back_btn);
@@ -81,11 +88,34 @@ public class RenterRegister extends AppCompatActivity {
             return true;
         }
     }
-    public void openRenterLogin() {
-        Intent intent = new Intent(this, RenterLogin.class);
+
+    public void openRenterRegisterPg2() {
+        Intent intent = new Intent(this, RenterRegisterPg2.class);
         startActivity(intent);
     }
 
+    private void addUserIdToRentersCollection(String user_id) {
+        Map<String, Object> details = new HashMap<>();
+        details.put("renterId", user_id);
+        db.collection("rentersUserIds").document(user_id).set(details);
+    }
+
+    private void addUserDetails(String name, String contactNum, String user_id) {
+        Map<String, Object> userDetails = new HashMap<>();
+        userDetails.put("name", name);
+        userDetails.put("contactNum", contactNum);
+        db.collection("RentersDetails").document(user_id).set(userDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(RenterRegister.this, "Details Successfully Added",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RenterRegister.this, "Firestore Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
     private void tryRegister(String email, String password, String confirm) {
         if (!validate(email, password, confirm)) {
@@ -96,12 +126,15 @@ public class RenterRegister extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                String user_id = mAuth.getCurrentUser().getUid();
+                                addUserIdToRentersCollection(user_id);
+                                addUserDetails("", "", user_id);
                                 Toast.makeText(RenterRegister.this, "Account created.",
                                         Toast.LENGTH_SHORT).show();
                                 Handler handler = new Handler();
                                 handler.postDelayed(new Runnable() {
                                     public void run() {
-                                        openRenterLogin();
+                                        openRenterRegisterPg2();
                                     }
                                 }, 1000);
                             } else {

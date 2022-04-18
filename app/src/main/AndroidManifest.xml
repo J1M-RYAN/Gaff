@@ -14,6 +14,12 @@
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key"/>
         <activity
+            android:name=".RenterProfileEdit"
+            android:exported="false" />
+        <activity
+            android:name=".RenterRegisterPg2"
+            android:exported="false" />
+        <activity
             android:name=".LandLordProfileEdit"
             android:exported="false" />
         <activity

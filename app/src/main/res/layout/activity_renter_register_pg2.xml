@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LandLordProfileEdit">
+    tools:context=".RenterRegisterPg2">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,7 +28,7 @@
             android:layout_marginBottom="40px"
             android:fontFamily="@font/lobster_two"
             android:gravity="center"
-            android:text="Profile Details"
+            android:text="Profile details"
             android:textSize="24sp" />
 
         <LinearLayout
@@ -79,77 +79,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20px"
-            android:layout_marginBottom="30px"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".20"
-                android:text="Email" />
-
-            <EditText
-                android:id="@+id/emailTextEdit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".80"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:layout_margin="20px"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".20"
-                android:text="Password" />
-
-            <EditText
-                android:id="@+id/passwordTextEdit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".80"
-                android:ems="10"
-                android:inputType="textPassword" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_margin="20px"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".20"
-                android:text="Repeat Password" />
-
-            <EditText
-                android:id="@+id/passwordTextEditConfirm"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".80"
-                android:ems="10"
-                android:inputType="textPassword" />
-
-
-        </LinearLayout>
-
         <Button
             android:id="@+id/register_btn"
             android:layout_width="200dp"
@@ -161,7 +90,6 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Back" />
-
 
     </LinearLayout>
 
