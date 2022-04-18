@@ -14,9 +14,28 @@
 
     <fragment
         android:id="@+id/browseProps"
-        android:name="com.example.gaff.BrowsePropsFrag"
+        android:name="com.example.gaff.LandlordsProperties"
         android:label="fragment_browse_props"
-        tools:layout="@layout/fragment_browse_props" />
+        tools:layout="@layout/fragment_browse_props" >
+        <action
+            android:id="@+id/action_landlordsProperties_to_propertyPostDescriptionFragment"
+            app:destination="@id/propertyPostDescriptionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/propertyPostDescriptionFragment"
+        android:name="com.example.gaff.PropertyPostDescriptionFragment"
+        android:label="fragment_property_post_description"
+        tools:layout="@layout/fragment_property_post_description" >
+        <action
+            android:id="@+id/action_propertyPostDescriptionFragment_to_googleMapPropertyLocationFragment"
+            app:destination="@id/googleMapPropertyLocationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/googleMapPropertyLocationFragment"
+        android:name="com.example.gaff.GoogleMapPropertyLocationFragment"
+        android:label="fragment_google_map_property_location"
+        tools:layout="@layout/fragment_google_map_property_location" />
 
     <fragment
         android:id="@+id/editProfile"
