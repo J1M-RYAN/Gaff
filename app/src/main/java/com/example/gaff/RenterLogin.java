@@ -33,7 +33,7 @@ public class RenterLogin extends AppCompatActivity {
     }
 
     private void goToRenterRegister(){
-        Intent i = new Intent(this, RenterRegister.class);
+        Intent i = new Intent(this, RenterHome.class);
         startActivity(i);
     }
 }

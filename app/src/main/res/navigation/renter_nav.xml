@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/renter_nav"
+    app:startDestination="@id/browseProps">
+
+    <fragment
+        android:id="@+id/savedProps"
+        android:name="com.example.gaff.SavedPropsFrag"
+        android:label="fragment_saved_props"
+        tools:layout="@layout/fragment_saved_props" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/browseProps"
+        android:name="com.example.gaff.BrowsePropsFrag"
+        android:label="fragment_browse_props"
+        tools:layout="@layout/fragment_browse_props" />
+
+    <fragment
+        android:id="@+id/editProfile"
+        android:name="com.example.gaff.EditRenterProfileFrag"
+        android:label="fragment_edit_renter_profile"
+        tools:layout="@layout/fragment_edit_renter_profile" />
+
+</navigation>
