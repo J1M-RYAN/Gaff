@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gaff">
         <activity
+            android:name=".RenterProfileEdit"
+            android:exported="false" />
+        <activity
             android:name=".RenterRegisterPg2"
             android:exported="false" />
         <activity

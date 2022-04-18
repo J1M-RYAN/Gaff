@@ -87,7 +87,7 @@ public class RenterRegisterPg2 extends AppCompatActivity {
         }
     }
     public void openRenterLogin() {
-        Intent intent = new Intent(this, RenterLogin.class);
+        Intent intent = new Intent(this, RenterProfileEdit.class);
         startActivity(intent);
     }
 
