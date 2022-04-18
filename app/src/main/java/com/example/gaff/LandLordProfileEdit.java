@@ -49,9 +49,6 @@ public class LandLordProfileEdit extends AppCompatActivity {
         contactNum = (EditText) findViewById(R.id.contactNumberTextEdit);
 
         currentDataOnDb = getCurrentDataFromDB();
-        email.setText("rambo");
-        name.setText(currentDataOnDb.get("name"));
-        contactNum.setText(currentDataOnDb.get("contactNum"));
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +80,7 @@ public class LandLordProfileEdit extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        String email = user.getEmail();
+        String userEmail = user.getEmail().toString();
         String user_id = mAuth.getCurrentUser().getUid();
         db.collection("LandLordsDetails")
             .document(user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -92,10 +89,15 @@ public class LandLordProfileEdit extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        HashMap<String, Object> dataOnDb = new HashMap<String,Object>(document.getData());
-                        returnDataOnDb.put("name", (String)dataOnDb.get("name"));
-                        returnDataOnDb.put("contactNum", (String)dataOnDb.get("contactNum"));
-                        returnDataOnDb.put("email", email);
+                        returnDataOnDb.put("name", document.get("name").toString());
+                        returnDataOnDb.put("contactNum", document.get("contactNum").toString());
+                        returnDataOnDb.put("email", userEmail);
+                        currentDataOnDb.put("name", document.get("name").toString());
+                        currentDataOnDb.put("contactNum", document.get("contactNum").toString());
+                        currentDataOnDb.put("email", userEmail);
+                        email.setText(userEmail);
+                        name.setText(document.get("name").toString());
+                        contactNum.setText(document.get("contactNum").toString());
                     }
                 }
             }
@@ -159,29 +161,6 @@ public class LandLordProfileEdit extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void addUserIdToLandLordsCollection(String user_id) {
-        Map<String, Object> details = new HashMap<>();
-        details.put("landlordId", user_id);
-        db.collection("LandlordsUserIds").document(user_id).set(details);
-    }
-
-    private void addUserDetails(String name, String contactNum, String user_id) {
-        Map<String, Object> userDetails = new HashMap<>();
-        userDetails.put("name", name);
-        userDetails.put("contactNum", contactNum);
-        db.collection("LandLordsDetails").document(user_id).set(userDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(LandLordProfileEdit.this, "Details Successfully Added",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(LandLordProfileEdit.this, "Firestore Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
     private void updateEmail(String email) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         user.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -227,29 +206,14 @@ public class LandLordProfileEdit extends AppCompatActivity {
                             String name, String contactNum) {
         if (!validate(email, password, confirm, name, contactNum)) {
             return;
-        }else{
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                String user_id = mAuth.getCurrentUser().getUid();
-                                addUserIdToLandLordsCollection(user_id);
-                                addUserDetails("", "", user_id);
-                                Toast.makeText(LandLordProfileEdit.this, "Details updated.",
-                                        Toast.LENGTH_SHORT).show();
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        openLandLordRegisterPg2();
-                                    }
-                                }, 1000);
-                            } else {
-                                Toast.makeText(LandLordProfileEdit.this, "Something went wrong.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+        }else {
+            if(currentDataOnDb.get("name").equals(name)){
+                Toast.makeText(LandLordProfileEdit.this, "Name still same",
+                        Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(LandLordProfileEdit.this, "Not same",
+                        Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
