@@ -41,7 +41,7 @@ public class AddNewProperty extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private EditText addressLine1, addressLine2, pricePerMonth, eircode, propertyType, bedrooms, bathrooms, title, privateParking;
+    private EditText addressLine1, addressLine2, pricePerMonth, eircode, longitude, latitude, propertyType, bedrooms, bathrooms, title, privateParking;
     Button addProperty;
 
     String user_id;
@@ -90,6 +90,8 @@ public class AddNewProperty extends Fragment {
         pricePerMonth = (EditText) rootView.findViewById(R.id.pricePerMonth);
         addProperty = (Button) rootView.findViewById(R.id.add_property_btn);
         eircode = (EditText) rootView.findViewById(R.id.eircode);
+        longitude = (EditText) rootView.findViewById(R.id.longitude);
+        latitude = (EditText) rootView.findViewById(R.id.latitude);
         propertyType = (EditText) rootView.findViewById(R.id.propertyType);
         bedrooms = (EditText) rootView.findViewById(R.id.bedrooms);
         bathrooms = (EditText) rootView.findViewById(R.id.bathrooms);
@@ -109,6 +111,8 @@ public class AddNewProperty extends Fragment {
                 final String address2 = addressLine2.getText().toString();
                 final String price = pricePerMonth.getText().toString();
                 final String eirCode = eircode.getText().toString();
+                final String Longitude = longitude.getText().toString();
+                final String Latitude = latitude.getText().toString();
                 final String propertyT = propertyType.getText().toString();
                 final String bedRooms = bedrooms.getText().toString();
                 final String bathRooms = bathrooms.getText().toString();
@@ -116,7 +120,7 @@ public class AddNewProperty extends Fragment {
                 final String privatePark = privateParking.getText().toString();
                 //final int price = Integer.parseInt(pricePerMonth.getText().toString());
                 if(!TextUtils.isEmpty(address1) && !TextUtils.isEmpty(address2) && !TextUtils.isEmpty(price)){
-                    addProperty(address1,address2,price,eirCode,propertyT,bedRooms,bathRooms,Title,privatePark);
+                    addProperty(address1,address2,price,eirCode,Longitude,Latitude,propertyT,bedRooms,bathRooms,Title,privatePark);
                 }else{
                     Toast.makeText(getActivity(), "Fill all the fields", Toast.LENGTH_SHORT).show();
                 }
@@ -129,13 +133,15 @@ public class AddNewProperty extends Fragment {
         return true;
     }
 
-    private void addProperty(String addressLine1, String addressLine2, String pricePerMonth, String eircode, String propertyType, String bedrooms,
+    private void addProperty(String addressLine1, String addressLine2, String pricePerMonth, String eircode, String longitude, String latitude, String propertyType, String bedrooms,
                              String bathrooms, String title, String privateParking) {
         Map<String, Object> property = new HashMap<>();
         property.put("addressLine1", addressLine1);
         property.put("addressLine2", addressLine2);
         property.put("pricePerMonth", pricePerMonth);
         property.put("eircode", eircode);
+        property.put("longitude", longitude);
+        property.put("latitude", latitude);
         property.put("propertyType", propertyType);
         property.put("bedrooms", bedrooms);
         property.put("bathrooms", bathrooms);

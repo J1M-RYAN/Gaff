@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".PropertyPostDescriptionFragment">
 
-
     <TextView
         android:id="@+id/AAprice"
         android:layout_width="wrap_content"
@@ -40,6 +39,17 @@
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/AAaddressline1"
         app:layout_constraintTop_toBottomOf="@+id/priceStatement1" />
+
+    <ImageButton
+        android:id="@+id/googleMapsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="60dp"
+        android:src="@android:drawable/ic_dialog_map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AAtitle"
+        app:tint="@color/purple_500" />
 
     <TextView
         android:id="@+id/AAeircode"
@@ -109,12 +119,13 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="230dp"
         android:src="@drawable/ic_home"
-        app:tint="@color/purple_500"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/purple_500" />
 
     <TextView
         android:id="@+id/priceStatement1"
@@ -179,12 +190,31 @@
         android:id="@+id/heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
         android:text="Property Description"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AAeircode" />
+
+    <TextView
+        android:id="@+id/AAlongitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="34dp"
+        android:text="52.716916068215106"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/googleMapsButton" />
+
+    <TextView
+        android:id="@+id/AAlatitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-8.554481467033924"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/AAlongitude"
+        app:layout_constraintTop_toBottomOf="@+id/AAlongitude" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

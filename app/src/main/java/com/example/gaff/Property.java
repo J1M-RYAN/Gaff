@@ -1,17 +1,19 @@
 package com.example.gaff;
 
 public class Property {
-    private String addressLine1, addressLine2, eircode, pricePerMonth, propertyType, bedrooms, bathrooms, title, privateParking;
+    private String addressLine1, addressLine2, eircode, longitude, latitude, pricePerMonth, propertyType, bedrooms, bathrooms, title, privateParking;
 
     public Property(){
         // required no arg constructor
     }
-    public Property(String addressLine1, String addressLine2, String pricePerMonth, String eircode, String propertyType,
+    public Property(String addressLine1, String addressLine2, String pricePerMonth, String eircode, String longitude, String latitude, String propertyType,
                     String bedrooms, String bathrooms, String title, String privateParking){
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.pricePerMonth = pricePerMonth;
         this.eircode = eircode;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.propertyType = propertyType;
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
@@ -88,5 +90,21 @@ public class Property {
 
     public void setPrivateParking(String privateParking) {
         this.privateParking = privateParking;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 }

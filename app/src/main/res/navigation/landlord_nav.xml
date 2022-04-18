@@ -28,5 +28,14 @@
         android:id="@+id/propertyPostDescriptionFragment"
         android:name="com.example.gaff.PropertyPostDescriptionFragment"
         android:label="fragment_property_post_description"
-        tools:layout="@layout/fragment_property_post_description" />
+        tools:layout="@layout/fragment_property_post_description" >
+        <action
+            android:id="@+id/action_propertyPostDescriptionFragment_to_googleMapPropertyLocationFragment"
+            app:destination="@id/googleMapPropertyLocationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/googleMapPropertyLocationFragment"
+        android:name="com.example.gaff.GoogleMapPropertyLocationFragment"
+        android:label="fragment_google_map_property_location"
+        tools:layout="@layout/fragment_google_map_property_location" />
 </navigation>

@@ -161,8 +161,9 @@ public class LandlordsProperties extends Fragment implements RecyclerViewInterfa
         String addressLine1 = propertyArrayList.get(position).getAddressLine1();
         String addressLine2 = propertyArrayList.get(position).getAddressLine2();
         String pricePerMonth = propertyArrayList.get(position).getPricePerMonth();
-
         String eircode = propertyArrayList.get(position).getEircode();
+        String longitude = propertyArrayList.get(position).getLongitude();
+        String latitude = propertyArrayList.get(position).getLatitude();
         String propertyType = propertyArrayList.get(position).getPropertyType();
         String bedrooms = propertyArrayList.get(position).getBedrooms();
         String bathrooms = propertyArrayList.get(position).getBathrooms();
@@ -174,6 +175,8 @@ public class LandlordsProperties extends Fragment implements RecyclerViewInterfa
         bundle.putString("addressLine2", addressLine2);
         bundle.putString("pricePerMonth", pricePerMonth);
         bundle.putString("eircode", eircode);
+        bundle.putString("longitude", longitude);
+        bundle.putString("latitude", latitude);
         bundle.putString("propertyType", propertyType);
         bundle.putString("bedrooms", bedrooms);
         bundle.putString("bathrooms", bathrooms);
