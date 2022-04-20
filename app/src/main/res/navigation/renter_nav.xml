@@ -39,8 +39,8 @@
 
     <fragment
         android:id="@+id/editProfile"
-        android:name="com.example.gaff.EditRenterProfileFrag"
-        android:label="fragment_edit_renter_profile"
-        tools:layout="@layout/fragment_edit_renter_profile" />
+        android:name="com.example.gaff.RenterProfileEditFrag"
+        android:label="fragment_renter_profile_edit"
+        tools:layout="@layout/fragment_renter_profile_edit" />
 
 </navigation>
