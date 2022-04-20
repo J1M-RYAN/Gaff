@@ -86,8 +86,8 @@ public class RenterRegisterPg2 extends AppCompatActivity {
             return true;
         }
     }
-    public void openRenterLogin() {
-        Intent intent = new Intent(this, RenterProfileEdit.class);
+    public void openRenterHome() {
+        Intent intent = new Intent(this, RenterHome.class);
         startActivity(intent);
     }
 
@@ -101,7 +101,7 @@ public class RenterRegisterPg2 extends AppCompatActivity {
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
-                    openRenterLogin();
+                    openRenterHome();
                 }
             }, 1000);
         };
