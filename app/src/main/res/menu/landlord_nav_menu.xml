@@ -10,7 +10,7 @@
         android:icon="@drawable/add_property"
         android:title="" />
     <item
-        android:id="@+id/landlordSettings"
+        android:id="@+id/editProfile"
         android:icon="@drawable/settings_icon"
         android:title="" />
 </menu>

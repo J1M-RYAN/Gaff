@@ -20,10 +20,10 @@
         android:label="fragment_add_new_property"
         tools:layout="@layout/fragment_add_new_property" />
     <fragment
-        android:id="@+id/landlordSettings"
-        android:name="com.example.gaff.landlordSettings"
-        android:label="fragment_landlord_settings"
-        tools:layout="@layout/fragment_landlord_settings" />
+        android:id="@+id/editProfile"
+        android:name="com.example.gaff.LandLordProfileEditFrag"
+        android:label="fragment_land_lord_profile_edit"
+        tools:layout="@layout/fragment_land_lord_profile_edit" />
     <fragment
         android:id="@+id/propertyPostDescriptionFragment"
         android:name="com.example.gaff.PropertyPostDescriptionFragment"
