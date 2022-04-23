@@ -54,6 +54,8 @@ public class LandlordsProperties extends Fragment implements RecyclerViewInterfa
     ArrayList<Property> propertyArrayList;
     PropertyAdapter propertyAdapter;
     FirebaseFirestore db;
+    FirebaseAuth mAuth;
+    String user_id;
     ProgressDialog progressDialog;
     private NavController navController;
 
@@ -111,6 +113,8 @@ public class LandlordsProperties extends Fragment implements RecyclerViewInterfa
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        mAuth = FirebaseAuth.getInstance();
+        user_id = mAuth.getCurrentUser().getUid();
         //Initialize firebase/fire store DB
         db = FirebaseFirestore.getInstance();
         propertyArrayList = new ArrayList<Property>();
@@ -124,7 +128,8 @@ public class LandlordsProperties extends Fragment implements RecyclerViewInterfa
 
     private void EventChangeListener() {
         //Refer to the collection
-        db.collection("Properties").orderBy("addressLine2", Query.Direction.ASCENDING)
+        db.collection("AllProperties").document(user_id)
+                .collection("UserAddedProperties").orderBy("addressLine1", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
