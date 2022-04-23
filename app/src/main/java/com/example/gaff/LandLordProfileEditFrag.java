@@ -2,7 +2,10 @@ package com.example.gaff;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,8 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,7 +46,7 @@ public class LandLordProfileEditFrag extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private Button back, register;
+    private Button back, register, logout;
     private EditText email, password, confirmPassword, name, contactNum;
     private Map<String, String> currentDataOnDb = new HashMap<>();
 
@@ -120,6 +125,20 @@ public class LandLordProfileEditFrag extends Fragment {
             }
         });
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated (@NonNull View view, @Nullable Bundle SavedInstanceState){ //Retrospective Method added - Once the view is created - method is called
+        super.onViewCreated(view, SavedInstanceState);
+
+        logout = (Button) view.findViewById(R.id.logout_btn);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { // We imported the navigation package
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getActivity(), MainActivity.class));
+            }
+        });
     }
 
     private HashMap<String, String> getCurrentDataFromDB(){
