@@ -46,7 +46,7 @@ public class LandLordProfileEditFrag extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private Button back, register, logout;
+    private Button register, logout;
     private EditText email, password, confirmPassword, name, contactNum;
     private Map<String, String> currentDataOnDb = new HashMap<>();
 
@@ -94,8 +94,6 @@ public class LandLordProfileEditFrag extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_land_lord_profile_edit, container, false);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
-        back = (Button) rootView.findViewById(R.id.back_btn);
         register = (Button) rootView.findViewById(R.id.register_btn);
         email = (EditText) rootView.findViewById(R.id.emailTextEdit);
         password = (EditText) rootView.findViewById(R.id.passwordTextEdit);
