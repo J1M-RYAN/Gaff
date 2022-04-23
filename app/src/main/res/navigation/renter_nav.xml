@@ -14,11 +14,11 @@
 
     <fragment
         android:id="@+id/browseProps"
-        android:name="com.example.gaff.LandlordsProperties"
+        android:name="com.example.gaff.AllPropertiesFeedFrag"
         android:label="fragment_browse_props"
         tools:layout="@layout/fragment_browse_props" >
         <action
-            android:id="@+id/action_landlordsProperties_to_propertyPostDescriptionFragment"
+            android:id="@+id/action_allPropertiesFeedFrag_to_propertyPostDescriptionFragment"
             app:destination="@id/propertyPostDescriptionFragment" />
     </fragment>
 
