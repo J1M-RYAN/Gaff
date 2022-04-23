@@ -138,18 +138,9 @@ public class AddNewProperty extends Fragment {
 
     private void addProperty(String addressLine1, String addressLine2, String pricePerMonth, String eircode, String longitude, String latitude, String propertyType, String bedrooms,
                              String bathrooms, String title, String privateParking) {
-        Map<String, Object> property = new HashMap<>();
-        property.put("addressLine1", addressLine1);
-        property.put("addressLine2", addressLine2);
-        property.put("pricePerMonth", pricePerMonth);
-        property.put("eircode", eircode);
-        property.put("longitude", longitude);
-        property.put("latitude", latitude);
-        property.put("propertyType", propertyType);
-        property.put("bedrooms", bedrooms);
-        property.put("bathrooms", bathrooms);
-        property.put("title", title);
-        property.put("privateParking", privateParking);
+        Property property = new Property(addressLine1, addressLine2, pricePerMonth,
+                eircode, longitude, latitude, propertyType, bedrooms, bathrooms,
+                title, privateParking);
         firebaseFirestore.collection("AllProperties").document(user_id)
                 .collection("UserAddedProperties").add(property)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
