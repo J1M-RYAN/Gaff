@@ -14,10 +14,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -147,16 +150,21 @@ public class AddNewProperty extends Fragment {
         property.put("bathrooms", bathrooms);
         property.put("title", title);
         property.put("privateParking", privateParking);
-        firebaseFirestore.collection("Properties").document(user_id).set(property).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(getActivity(), "Property Successfully Added",
-                            Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getActivity(), "Firestore Error: "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        firebaseFirestore.collection("AllProperties").document(user_id)
+                .collection("UserAddedProperties").add(property)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(getActivity(), "Property Successfully Added",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "Firestore Error: "+
+                                e,Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
