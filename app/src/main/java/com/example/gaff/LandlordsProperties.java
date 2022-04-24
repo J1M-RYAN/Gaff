@@ -97,17 +97,11 @@ public class LandlordsProperties extends Fragment implements RecyclerViewInterfa
 
         return  inflater.inflate(R.layout.fragment_landlords_properties, container, false);
     }
-
-
+    
     @Override
     public void onViewCreated (@NonNull View view, @Nullable Bundle SavedInstanceState){ //Retrospective Method added - Once the view is created - method is called
         super.onViewCreated(view, SavedInstanceState);
         navController = Navigation.findNavController(view);
-
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Fetching Data....");
-        progressDialog.show();
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -139,14 +133,9 @@ public class LandlordsProperties extends Fragment implements RecyclerViewInterfa
 
                         //Order fetched data from the fire store
                         if(error != null){
-
-                            if(progressDialog.isShowing()){
-                                progressDialog.dismiss();
-                            }
                             Log.e("Firestore error", error.getMessage());
                             return;
                         }
-
                         for(DocumentChange dc : value.getDocumentChanges()){
                             if(dc.getType() == DocumentChange.Type.ADDED){
                                 propertyArrayList.add(dc.getDocument().toObject(Property.class));
