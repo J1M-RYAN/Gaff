@@ -135,6 +135,12 @@ public class SaveBtnPostPropFrag extends Fragment {
         //Button
         Button saveBtn = view.findViewById(R.id.saveBtn);
 
+        //Changed Save button to unsave if property is saved already
+        String isPropSaved = getArguments().getString("savedProp");
+        if(isPropSaved == "saved"){
+            saveBtn.setText("Unsave");
+        }
+
         //Set
         priceTextView.setText(price);
         addressLine1TextView.setText(addressLine1);

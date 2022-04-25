@@ -173,7 +173,8 @@ public class AllPropertiesFeedFrag extends Fragment implements RecyclerViewInter
         bundle.putString("bathrooms", bathrooms);
         bundle.putString("title", title);
         bundle.putString("privateParking", privateParking);
+        bundle.putString("savedProp", "unsaved");
 
-        navController.navigate(R.id.action_allPropertiesFeedFrag_to_propertyPostDescriptionFragment, bundle);
+        navController.navigate(R.id.action_savedProps_to_propertyPostDescriptionFragment, bundle);
     }
 }

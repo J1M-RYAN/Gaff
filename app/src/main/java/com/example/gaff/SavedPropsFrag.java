@@ -171,6 +171,7 @@ public class SavedPropsFrag extends Fragment implements RecyclerViewInterface{
         bundle.putString("bathrooms", bathrooms);
         bundle.putString("title", title);
         bundle.putString("privateParking", privateParking);
+        bundle.putString("savedProp", "saved");
 
         navController.navigate(R.id.action_savedProps_to_propertyPostDescriptionFragment, bundle);
     }
