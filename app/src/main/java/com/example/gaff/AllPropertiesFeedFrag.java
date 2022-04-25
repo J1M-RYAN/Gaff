@@ -1,6 +1,4 @@
 package com.example.gaff;
-
-import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -56,7 +54,6 @@ public class AllPropertiesFeedFrag extends Fragment implements RecyclerViewInter
     FirebaseFirestore db;
     FirebaseAuth mAuth;
     String user_id;
-    ProgressDialog progressDialog;
     private NavController navController;
 
     public AllPropertiesFeedFrag() {
@@ -104,11 +101,6 @@ public class AllPropertiesFeedFrag extends Fragment implements RecyclerViewInter
         super.onViewCreated(view, SavedInstanceState);
         navController = Navigation.findNavController(view);
 
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Fetching Data....");
-        progressDialog.show();
-
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -140,9 +132,6 @@ public class AllPropertiesFeedFrag extends Fragment implements RecyclerViewInter
                         //Order fetched data from the fire store
                         if(error != null){
 
-                            if(progressDialog.isShowing()){
-                                progressDialog.dismiss();
-                            }
                             Log.e("Firestore error", error.getMessage());
                             return;
                         }
@@ -152,9 +141,6 @@ public class AllPropertiesFeedFrag extends Fragment implements RecyclerViewInter
                                 propertyArrayList.add(dc.getDocument().toObject(Property.class));
                             }
                             propertyAdapter.notifyDataSetChanged();
-                            if(progressDialog.isShowing()){
-                                progressDialog.dismiss();
-                            }
                         }
 
                     }
