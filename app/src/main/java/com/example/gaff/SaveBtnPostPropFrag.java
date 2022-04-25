@@ -18,8 +18,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
@@ -27,6 +29,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -155,10 +158,33 @@ public class SaveBtnPostPropFrag extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                saveProp(eircode);
+                if(isPropSaved == "saved"){
+                    unSaveProp(eircode);
+                }else{
+                    saveProp(eircode);
+                }
             }
         });
+    }
+
+    public void unSaveProp(String propEircode){
+        String user_id = mAuth.getCurrentUser().getUid();
+        db.collection("SavedProperties").document(user_id)
+                .collection("UserSavedProperties").whereEqualTo("eircode", propEircode)
+                .get().
+            addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        //if there is no document to delete the loop will exit without iterating even once
+                        for (QueryDocumentSnapshot document : task.getResult()){
+                            Toast.makeText(getActivity(), "Property unsaved",
+                                    Toast.LENGTH_SHORT).show();
+                            document.getReference().delete();
+                        }
+                    }
+                }
+            });
     }
 
     public void saveProp(String propEircode){

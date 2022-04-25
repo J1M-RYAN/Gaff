@@ -120,8 +120,8 @@ public class SavedPropsFrag extends Fragment implements RecyclerViewInterface{
 
     private void EventChangeListener() {
         //Refer to the collection
-        db.collection("AllProperties").document(user_id)
-                .collection("UserAddedProperties").orderBy("addressLine1", Query.Direction.ASCENDING)
+        db.collection("SavedProperties").document(user_id)
+                .collection("UserSavedProperties").orderBy("addressLine1", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
