@@ -8,13 +8,18 @@
         <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/activity_main3.xml" value="0.1" />
         <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/activity_renter_home.xml" value="0.1" />
         <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_add_new_property.xml" value="0.1" />
+        <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_all_properties_feed.xml" value="0.1" />
         <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_browse_props.xml" value="0.1" />
         <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_edit_renter_profile.xml" value="0.25" />
         <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_f.xml" value="0.18" />
+        <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_google_map_property_location.xml" value="0.1" />
         <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_landlords_properties.xml" value="0.1" />
         <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
+        <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_property_post_description.xml" value="0.16" />
+        <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_save__btn__post__property_frag.xml" value="0.1" />
+        <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_save_btn_post_prop.xml" value="0.25" />
         <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/fragment_saved_props.xml" value="0.1" />
         <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/layout/landlord_property_list_item.xml" value="0.1" />
         <entry key="..\:/Users/18284728/Documents/GitHub/Gaff/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />

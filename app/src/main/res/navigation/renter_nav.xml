@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_saved_props" >
         <action
             android:id="@+id/action_savedProps_to_propertyPostDescriptionFragment"
-            app:destination="@id/propertyPostDescriptionFragment" />
+            app:destination="@id/saveBtnPostProp" />
     </fragment>
 
     <fragment
@@ -24,6 +24,12 @@
             android:id="@+id/action_allPropertiesFeedFrag_to_propertyPostDescriptionFragment"
             app:destination="@id/propertyPostDescriptionFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/saveBtnPostProp"
+        android:name="com.example.gaff.SaveBtnPostPropFrag"
+        android:label="fragment_save_btn_post_prop"
+        tools:layout="@layout/fragment_save_btn_post_prop" />
 
     <fragment
         android:id="@+id/propertyPostDescriptionFragment"
