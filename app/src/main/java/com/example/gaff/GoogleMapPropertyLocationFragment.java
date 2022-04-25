@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Locale;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link GoogleMapPropertyLocationFragment#newInstance} factory method to
@@ -25,6 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class GoogleMapPropertyLocationFragment extends Fragment implements OnMapReadyCallback {
 
     GoogleMap map;
+    String addressLine1, longitude, latitude;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,6 +74,10 @@ public class GoogleMapPropertyLocationFragment extends Fragment implements OnMap
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        addressLine1 = getArguments().getString("addressLine1");
+        longitude = getArguments().getString("longitude");
+        latitude = getArguments().getString("latitude");
+
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
@@ -87,8 +95,11 @@ public class GoogleMapPropertyLocationFragment extends Fragment implements OnMap
     public void onMapReady(GoogleMap googleMap){
         map = googleMap;
 
-        LatLng Limerick = new LatLng(52.663157,-8.619842);
-        map.addMarker(new MarkerOptions().position(Limerick).title("Limerick"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(Limerick));
+        float lat = Float.parseFloat(latitude);
+        float lng = Float.parseFloat(longitude);
+
+        LatLng county = new LatLng(lat,-lng);
+        map.addMarker(new MarkerOptions().position(county).title(addressLine1));
+        map.moveCamera(CameraUpdateFactory.newLatLng(county));
     }
 }
