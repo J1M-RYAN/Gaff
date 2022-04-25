@@ -77,23 +77,29 @@ public class PropertyPostDescriptionFragment extends Fragment {
     public void onViewCreated (@NonNull View view, @Nullable Bundle SavedInstanceState){ //Retrospective Method added - Once the view is created - method is called
         super.onViewCreated(view, SavedInstanceState);
 
+        String addressLine1 = getArguments().getString("addressLine1");
+        String longitude = getArguments().getString("longitude");
+        String latitude = getArguments().getString("latitude");
+
         //Button 1
         ImageButton GoogleMapsButton = view.findViewById(R.id.googleMapsButton);
         GoogleMapsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { // We imported the navigation package
-                Navigation.findNavController(v).navigate(R.id.action_propertyPostDescriptionFragment_to_googleMapPropertyLocationFragment); // navigating from the first fragment to the second fragment
+
+                Bundle bundle = new Bundle();
+                bundle.putString("addressLine1", addressLine1);
+                bundle.putString("longitude", longitude);
+                bundle.putString("latitude", latitude);
+
+                Navigation.findNavController(v).navigate(R.id.action_propertyPostDescriptionFragment_to_googleMapPropertyLocationFragment, bundle); // navigating from the first fragment to the second fragment
             }
         });
 
         //Variable
         String price = getArguments().getString("pricePerMonth");
-        String addressLine1 = getArguments().getString("addressLine1");
         String addressLine2 = getArguments().getString("addressLine2");
-
         String eircode = getArguments().getString("eircode");
-        String longitude = getArguments().getString("longitude");
-        String latitude = getArguments().getString("latitude");
         String propertyType = getArguments().getString("propertyType");
         String bedrooms = getArguments().getString("bedrooms");
         String bathrooms = getArguments().getString("bathrooms");
@@ -106,8 +112,6 @@ public class PropertyPostDescriptionFragment extends Fragment {
         TextView addressLine2TextView = view.findViewById(R.id.AAaddressline2);
 
         TextView eircodeTextView = view.findViewById(R.id.AAeircode);
-        TextView longitudeTextView = view.findViewById(R.id.AAlongitude);
-        TextView latitudeTypeTextView = view.findViewById(R.id.AAlatitude);
         TextView propertyTypeTextView = view.findViewById(R.id.AApropertyType);
         TextView bedroomsTextView = view.findViewById(R.id.AAbedrooms);
         TextView bathroomsTextView = view.findViewById(R.id.AAbathrooms);
@@ -119,8 +123,6 @@ public class PropertyPostDescriptionFragment extends Fragment {
         addressLine1TextView.setText(addressLine1);
         addressLine2TextView.setText(addressLine2);
         eircodeTextView.setText(eircode);
-        longitudeTextView.setText(longitude);
-        latitudeTypeTextView.setText(latitude);
         propertyTypeTextView.setText(propertyType);
         bedroomsTextView.setText(bedrooms);
         bathroomsTextView.setText(bathrooms);
