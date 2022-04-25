@@ -198,23 +198,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AAeircode" />
 
-    <TextView
-        android:id="@+id/AAlongitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="34dp"
-        android:text="52.716916068215106"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/googleMapsButton" />
-
-    <TextView
-        android:id="@+id/AAlatitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-8.554481467033924"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/AAlongitude"
-        app:layout_constraintTop_toBottomOf="@+id/AAlongitude" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
