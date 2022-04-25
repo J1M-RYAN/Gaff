@@ -10,6 +10,9 @@
         android:name="com.example.gaff.SavedPropsFrag"
         android:label="fragment_saved_props"
         tools:layout="@layout/fragment_saved_props" >
+        <action
+            android:id="@+id/action_savedProps_to_propertyPostDescriptionFragment"
+            app:destination="@id/propertyPostDescriptionFragment" />
     </fragment>
 
     <fragment
