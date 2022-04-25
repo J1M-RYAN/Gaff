@@ -1,6 +1,5 @@
 package com.example.gaff;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -56,7 +55,6 @@ public class LandlordsProperties extends Fragment implements RecyclerViewInterfa
     FirebaseFirestore db;
     FirebaseAuth mAuth;
     String user_id;
-    ProgressDialog progressDialog;
     private NavController navController;
 
     public LandlordsProperties() {
@@ -141,9 +139,6 @@ public class LandlordsProperties extends Fragment implements RecyclerViewInterfa
                                 propertyArrayList.add(dc.getDocument().toObject(Property.class));
                             }
                             propertyAdapter.notifyDataSetChanged();
-                            if(progressDialog.isShowing()){
-                                progressDialog.dismiss();
-                            }
                         }
 
                     }
