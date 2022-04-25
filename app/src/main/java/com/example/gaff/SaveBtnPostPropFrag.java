@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -32,6 +42,8 @@ public class SaveBtnPostPropFrag extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -137,14 +149,52 @@ public class SaveBtnPostPropFrag extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                print();
+
+                saveProp(eircode);
             }
         });
     }
 
-    public void print(){
-        Toast.makeText(getActivity(), "Button pressed",
-                Toast.LENGTH_SHORT).show();
+    public void saveProp(String propEircode){
+        db.collectionGroup("UserAddedProperties")
+                .orderBy("eircode", Query.Direction.ASCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        //Order fetched data from the fire store
+                        if(error != null){
+
+                            Log.e("Firestore error", error.getMessage());
+                            return;
+                        }
+
+                        for(DocumentChange dc : value.getDocumentChanges()){
+                            if(dc.getType() == DocumentChange.Type.ADDED){
+                                Property prop = dc.getDocument().toObject(Property.class);
+                                if(prop.getEircode().compareTo(propEircode) == 0){
+                                    String user_id = mAuth.getCurrentUser().getUid();
+                                    db.collection("SavedProperties").document(user_id)
+                                            .collection("UserSavedProperties").add(prop)
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+                                                    Toast.makeText(getActivity(), "Property Successfully Saved",
+                                                            Toast.LENGTH_SHORT).show();
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(getActivity(), "Firestore Error: "+
+                                                            e,Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                            }
+                        }
+
+                    }
+                });
     }
 
 }
